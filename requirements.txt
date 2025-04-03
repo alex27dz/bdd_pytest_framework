@@ -1,0 +1,5 @@
+selenium
+pytest
+behave
+pytest-bdd
+webdriver-manager

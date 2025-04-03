@@ -1,0 +1,48 @@
+trigger:
+- main  # Trigger pipeline on changes to the 'main' branch
+
+pool:
+  vmImage: 'ubuntu-latest'  # Using the latest Ubuntu image for the pipeline
+
+variables:
+  pythonVersion: '3.x'  # Set the Python version to use (you can adjust this to a specific version if needed)
+  workingDirectory: $(System.DefaultWorkingDirectory)
+
+jobs:
+- job: Test
+  displayName: 'Run Behave Tests'
+  steps:
+
+    # Step 1: Checkout the repository
+    - task: Checkout@1
+      inputs:
+        clean: true  # Ensures the workspace is clean before starting
+
+    # Step 2: Set up Python environment
+    - task: UsePythonVersion@0
+      inputs:
+        versionSpec: $(pythonVersion)  # Select the Python version to use
+        addToPath: true
+
+    # Step 3: Install dependencies
+    - script: |
+        python -m venv .venv  # Create a virtual environment
+        ./.venv/bin/pip install --upgrade pip  # Upgrade pip
+        ./.venv/bin/pip install -r requirements.txt  # Install required packages (Make sure `requirements.txt` includes all dependencies)
+      displayName: 'Install dependencies'
+
+    # Step 4: Run Behave tests
+    - script: |
+        ./.venv/bin/behave tests/features/login.feature  # Run the Behave feature file
+      displayName: 'Run Behave Tests'
+
+    # Step 5: Publish test results (if you have results in a compatible format, such as JSON)
+    - task: PublishTestResults@2
+      inputs:
+        testResultsFiles: '**/test-*.xml'  # Ensure that test results are saved in XML format for Azure DevOps to process
+        testRunTitle: 'Behave Test Results'
+
+    # Optional: Clean up the virtual environment after tests (to save storage)
+    - script: |
+        rm -rf .venv  # Remove the virtual environment after the tests are complete
+      displayName: 'Clean up virtual environment'

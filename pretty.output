@@ -1,0 +1,58 @@
+Feature: Login Functionality # tests/features/login.feature:1
+
+  @smoke
+  Scenario: Successful login               # tests/features/login.feature:3
+    Given the user is on the login page    # tests/steps/login_steps.py:4
+    When the user enters valid credentials # tests/steps/login_steps.py:9
+      Traceback (most recent call last):
+        File "/Users/alexdezho/Documents/Frameworks/Python_Automation/venv_bdd_framework/.venv/lib/python3.11/site-packages/behave/model.py", line 1329, in run
+          match.run(runner.context)
+        File "/Users/alexdezho/Documents/Frameworks/Python_Automation/venv_bdd_framework/.venv/lib/python3.11/site-packages/behave/matchers.py", line 98, in run
+          self.func(context, *args, **kwargs)
+        File "tests/steps/login_steps.py", line 11, in step_impl
+          context.page.login("alex27dz@gmail.com", "NV27vnmc")
+        File "/Users/alexdezho/Documents/Frameworks/Python_Automation/bdd_pytest_framework/pages/login_page.py", line 30, in login
+          self.enter_text(self.PASSWORD_FIELD, password)
+        File "/Users/alexdezho/Documents/Frameworks/Python_Automation/bdd_pytest_framework/pages/base_page.py", line 21, in enter_text
+          self.find_element(locator).send_keys(text)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^
+        File "/Users/alexdezho/Documents/Frameworks/Python_Automation/bdd_pytest_framework/pages/base_page.py", line 15, in find_element
+          return self.driver.find_element(*locator)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        File "/Users/alexdezho/Documents/Frameworks/Python_Automation/venv_bdd_framework/.venv/lib/python3.11/site-packages/selenium/webdriver/remote/webdriver.py", line 898, in find_element
+          return self.execute(Command.FIND_ELEMENT, {"using": by, "value": value})["value"]
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        File "/Users/alexdezho/Documents/Frameworks/Python_Automation/venv_bdd_framework/.venv/lib/python3.11/site-packages/selenium/webdriver/remote/webdriver.py", line 429, in execute
+          self.error_handler.check_response(response)
+        File "/Users/alexdezho/Documents/Frameworks/Python_Automation/venv_bdd_framework/.venv/lib/python3.11/site-packages/selenium/webdriver/remote/errorhandler.py", line 232, in check_response
+          raise exception_class(message, screen, stacktrace)
+      selenium.common.exceptions.NoSuchElementException: Message: no such element: Unable to locate element: {"method":"css selector","selector":"[id="password"]"}
+        (Session info: chrome=134.0.6998.166); For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#no-such-element-exception
+      Stacktrace:
+      0   chromedriver                        0x0000000103173568 chromedriver + 6088040
+      1   chromedriver                        0x000000010316b17a chromedriver + 6054266
+      2   chromedriver                        0x0000000102c0a540 chromedriver + 415040
+      3   chromedriver                        0x0000000102c5c0a0 chromedriver + 749728
+      4   chromedriver                        0x0000000102c5c2f1 chromedriver + 750321
+      5   chromedriver                        0x0000000102cac764 chromedriver + 1079140
+      6   chromedriver                        0x0000000102c8241d chromedriver + 906269
+      7   chromedriver                        0x0000000102ca9a19 chromedriver + 1067545
+      8   chromedriver                        0x0000000102c821c3 chromedriver + 905667
+      9   chromedriver                        0x0000000102c4e05a chromedriver + 692314
+      10  chromedriver                        0x0000000102c4f1b1 chromedriver + 696753
+      11  chromedriver                        0x0000000103132c90 chromedriver + 5823632
+      12  chromedriver                        0x0000000103136b44 chromedriver + 5839684
+      13  chromedriver                        0x000000010310de86 chromedriver + 5672582
+      14  chromedriver                        0x000000010313753b chromedriver + 5842235
+      15  chromedriver                        0x00000001030fc824 chromedriver + 5601316
+      16  chromedriver                        0x0000000103159618 chromedriver + 5981720
+      17  chromedriver                        0x00000001031597df chromedriver + 5982175
+      18  chromedriver                        0x000000010316ad58 chromedriver + 6053208
+      19  libsystem_pthread.dylib             0x00007ff80647e253 _pthread_start + 99
+      20  libsystem_pthread.dylib             0x00007ff806479bef thread_start + 15
+      
+      
+      Captured stdout:
+      Screenshot saved as username_entered_20250402-213051.png
+
+
